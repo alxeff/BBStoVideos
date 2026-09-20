@@ -30,53 +30,6 @@ dotnet run
 Note: all three actions work on the top level of the chosen folder only; they do
 not recurse into subfolders.
 
-## Publishing to GitHub
-
-Push **this folder** (`bbsTovideos`) as its own repository. Do not push the
-parent `aliks` folder — it contains a `bottoken.txt` and large unrelated files.
-
-1. Install Git if you do not have it: `winget install --id Git.Git -e`, then
-   restart the terminal.
-2. Create an **empty** repository on GitHub (no README, no .gitignore, no
-   license — otherwise the first push conflicts).
-3. From this folder:
-
-```powershell
-git init
-git add .
-git status          # should list the 11 files below
-git commit -m "Initial commit: BBStoVideos"
-git branch -M main
-git remote add origin https://github.com/<you>/BBStoVideos.git
-git push -u origin main
-```
-
-`git status` should show exactly these 11 files and nothing else:
-
-```
-.gitignore
-BBStoVideos.slnx
-BBStoVideos/BBStoVideos.csproj
-BBStoVideos/Form1.cs
-BBStoVideos/Form1.Designer.cs
-BBStoVideos/Form1.resx
-BBStoVideos/Program.cs
-BBStoVideos/Properties/Resources.Designer.cs
-BBStoVideos/Properties/Resources.resx
-LICENSE
-README.md
-```
-
-If you see any `bin/`, `obj/`, `.vs/` or `*.csproj.user` entries, the
-`.gitignore` is not being picked up — do not commit until that is fixed.
-`BBStoVideos.csproj.user` in particular stores local machine paths.
-
-Note: `Form1.resx` is about 1 MB because it contains an embedded image. That is
-expected.
-
-If you ever do commit a secret, deleting the file is not enough — it stays in
-the history and in every clone. Rotate the credential and rewrite history with
-`git filter-repo` before pushing.
 
 ## License
 
